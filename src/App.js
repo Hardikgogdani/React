@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
-import User from './User';
-import Student from './Student';
+
 
 export default class App extends Component {
     state ={
-        isLogged : false
+        change : false
     }
-
-    clickSignup= () =>{
-        this.setState({isLogged:true});
+    clickChange =()=>{
+        this.setState({change: true});
     };
 
-    clickLogout =() =>{
-        this.setState({isLogged:false});
-    };
-    render(){
-        const isLogged = this.props.isLogged;
-        if (isLogged) {
-            return<User  clickData={this.clickLogout}/>;
+    render() {
+        const buttonChange = {
+            Color: "RED",
+            backgroundColor : "orange",
+            margin: "12%",
+            borderRadius : "12%"
+        };
+
+        if(this.setState.change){
+            buttonChange.backgroundColor = "purple";
         }
-        else{
-            return<Student clickData={this.clickSignup}/>;
-        }
+        return (
+            <div>
+                <button onClick={this.clickChange} style={buttonChange}>click Me</button>
+            </div>
+        )
     }
-        
 }
