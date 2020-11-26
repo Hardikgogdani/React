@@ -50,37 +50,7 @@ export default class App extends Component {
         });
         this.setState({ list })
         console.log(this.state)
-        // }
-        // else {
-        //     if (isValidate()) {
-        //         this.state.list.push({
-        //             firstName: this.state.firstName,
-        //             lastName: this.state.lastName,
-        //             email: this.state.email
-        //         });
-        //         this.setState(list)
-        //     }
-        //     this.show();
-        // }
     };
-
-    // show = () => {
-    //     const { list } = this.state
-    //     let tablebody = document.getElementById('tbody');
-    //     let str = "";
-    //     list.forEach((element, index) => {
-    //         str += `
-    //     <tr>
-    //         <td>${element.firstName}</td>
-    //         <td>${element.lastName}</td>
-    //         <td>${element.email}</td>
-    //         <td><button onclick="deletee(${index})" value="delete">delete</button></td>
-    //         <td><button onclick="update(${index})">Update</td>
-    //     </tr> `;
-    //     });
-    //     tablebody.innerHTML = str;
-    // }
-
     deletee = (index) => {
         const { list } = this.state
         list.splice(index, 1);
@@ -97,7 +67,6 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                {/* <form onSubmit={this.isValidate}> */}
                 <h1>Registration form</h1>
                     First name:<input type="text" value={this.state.fname} name="firstName" onChange={this.handleChange} /><br /><br />
 
