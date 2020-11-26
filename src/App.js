@@ -42,7 +42,6 @@ export default class App extends Component {
     handleSubmit = () => {
         debugger
         const { firstName, lastName, email, list } = this.state
-        // if (!localStorage.getItem('data')) {
         list.push({
             firstName: firstName,
             lastName: lastName,
@@ -51,6 +50,10 @@ export default class App extends Component {
         this.setState({ list })
         console.log(this.state)
     };
+
+    reset =() => {
+        this.state.value = "";
+    }
     deletee = (index) => {
         const { list } = this.state
         list.splice(index, 1);
@@ -63,7 +66,6 @@ export default class App extends Component {
         this.state.lastName = list[index].lastName;
         this.setState({ isEditableIndex: index })
     }
-
     render() {
         return (
             <div>
