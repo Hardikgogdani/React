@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 export default class App extends Component {
 
     state = {
@@ -40,18 +41,18 @@ export default class App extends Component {
     }
 
     handleSubmit = () => {
-        debugger
-        const { firstName, lastName, email, list } = this.state
-        list.push({
-            firstName: firstName,
-            lastName: lastName,
-            email: email
-        });
-        this.setState({ list })
-        console.log(this.state)
+        
+            const { firstName, lastName, email, list } = this.state
+            list.push({
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            });
+            this.setState({ list })
+            console.log(this.state)
     };
 
-    reset =() => {
+    reset = () => {
         this.state.value = "";
     }
     deletee = (index) => {
@@ -68,7 +69,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <h1>Registration form</h1>
                     First name:<input type="text" value={this.state.fname} name="firstName" onChange={this.handleChange} /><br /><br />
 
@@ -76,7 +77,7 @@ export default class App extends Component {
 
                     E-mail:<input type="text" value={this.state.email} name="email" onChange={this.handleChange} /><br /><br />
 
-                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} /><br /><br />
+                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange}   maxLength="50" cols="45" rows="2"/><br /><br />
 
                     Gender:<input type="radio" name="gender" />Male
                 <input type="radio" name="gender" />Female<br /><br />
@@ -95,10 +96,12 @@ export default class App extends Component {
                     <option value="lightgreen">lightgreen</option>
                 </select><br /><br />
 
-                    Phone Number :
-                <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <br /><br />
+                    Phone Number : <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <br /><br />
 
-                <button onClick={this.handleSubmit}>Submit</button><br /><br />
+                <button onClick={this.handleSubmit}>Submit</button>
+
+                <button onClick={this.handleReset}>Reset</button><br /><br />
+
 
                 <table border="1px solid">
                     <thead>
@@ -128,7 +131,7 @@ export default class App extends Component {
 
                 </table>
 
-            </div>
+            </React.Fragment>
         )
     }
 }
