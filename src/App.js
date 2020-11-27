@@ -53,11 +53,15 @@ export default class App extends Component {
 
     handleSubmit = () => {
 
-        const { firstName, lastName, email, list } = this.state
+        const { firstName, lastName, email, gender,address,color,phonenumber, list } = this.state
         list.push({
             firstName: firstName,
             lastName: lastName,
-            email: email
+            email: email,
+            gender: gender,
+            address: address,
+            color: color,
+            phonenumber:phonenumber
         });
         this.setState({ list })
         console.log(this.state)
@@ -76,6 +80,11 @@ export default class App extends Component {
         const { list } = this.state
         this.state.firstName = list[index].firstName;
         this.state.lastName = list[index].lastName;
+        this.state.email = list[index].email;
+        this.state.gender = list[index].gender;
+        this.state.address = list[index].address;
+        this.state.color = list[index].color;
+        this.state.phonenumber = list[index].phonenumber;
         this.setState({ isEditableIndex: index })
     }
     render() {
@@ -120,6 +129,10 @@ export default class App extends Component {
                             <th>firstName</th>
                             <th>LastName</th>
                             <th>E-mail</th>
+                            <th>Gender</th>
+                            <th>address</th>
+                            <th>Color</th>
+                            <th>phonenumber</th>
                             <th colSpan="2">Action</th>
                         </tr>
                     </thead>
@@ -131,6 +144,10 @@ export default class App extends Component {
                                     <td>{user.firstName}</td>
                                     <td>{user.lastName}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.gender}</td>
+                                    <td>{user.address}</td>
+                                    <td>{user.color}</td>
+                                    <td>{user.phonenumber}</td>
                                     <td>
                                         <button onClick={() => { this.updatee(index) }}>Edit</button>
                                         <button onClick={() => { this.deletee(index) }}>Delete</button>
