@@ -19,6 +19,17 @@ export default class App extends Component {
             [e.target.name]: e.target.value
         });
     };
+    handleReset = (e) => {
+        this.setState({
+            firstName: '',
+            lastName: "",
+            email: "",
+            address: "",
+            color: "",
+            phonenumber: "",
+            isEditableIndex: null
+        });
+    };
 
     isValidate = () => {
         const isValid = this.validation();
@@ -41,15 +52,15 @@ export default class App extends Component {
     }
 
     handleSubmit = () => {
-        
-            const { firstName, lastName, email, list } = this.state
-            list.push({
-                firstName: firstName,
-                lastName: lastName,
-                email: email
-            });
-            this.setState({ list })
-            console.log(this.state)
+
+        const { firstName, lastName, email, list } = this.state
+        list.push({
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        });
+        this.setState({ list })
+        console.log(this.state)
     };
 
     reset = () => {
@@ -71,13 +82,13 @@ export default class App extends Component {
         return (
             <React.Fragment>
                 <h1>Registration form</h1>
-                    First name:<input type="text" value={this.state.fname} name="firstName" onChange={this.handleChange} /><br /><br />
+                    First name:<input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} /><br /><br />
 
-                    Last name:<input type="text" value={this.state.lname} name="lastName" onChange={this.handleChange} /><br /><br />
+                    Last name:<input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange} /><br /><br />
 
                     E-mail:<input type="text" value={this.state.email} name="email" onChange={this.handleChange} /><br /><br />
 
-                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange}   maxLength="50" cols="45" rows="2"/><br /><br />
+                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} maxLength="50" cols="45" rows="2" /><br /><br />
 
                     Gender:<input type="radio" name="gender" />Male
                 <input type="radio" name="gender" />Female<br /><br />
