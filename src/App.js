@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 export default class App extends Component {
 
@@ -11,12 +11,19 @@ export default class App extends Component {
         color: "",
         gender: "",
         phonenumber: "",
+        hobbies: "",
         list: [],
         isEditableIndex: null
     };
     setGender = (e) => {
         this.setState({
             gender: e.target.value
+        })
+    };
+    setCheck = (e) => {
+        console.log(e.target);
+        this.setState({
+            hobbies : [...this.state.hobbies, e.target.value]
         })
     };
 
@@ -34,6 +41,7 @@ export default class App extends Component {
             gender: "",
             color: "",
             phonenumber: "",
+            hobbies: "",
             isEditableIndex: null
         });
     };
@@ -60,7 +68,7 @@ export default class App extends Component {
 
     handleSubmit = () => {
 
-        const { firstName, lastName, email, gender, address, color, phonenumber, list } = this.state
+        const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
         console.log(this.state);
         list.push({
             firstName: firstName,
@@ -68,6 +76,7 @@ export default class App extends Component {
             email: email,
             address: address,
             gender: gender,
+            hobbies: hobbies,
             color: color,
             phonenumber: phonenumber
         });
@@ -87,8 +96,8 @@ export default class App extends Component {
         this.state.lastName = list[index].lastName;
         this.state.email = list[index].email;
         this.state.gender = list[index].gender;
-        // this.state.gender
         this.state.address = list[index].address;
+        this.state.hobbies = list[index].hobbies;
         this.state.color = list[index].color;
         this.state.phonenumber = list[index].phonenumber;
         this.setState({ isEditableIndex: index })
@@ -106,16 +115,17 @@ export default class App extends Component {
                     Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} maxLength="50" cols="45" rows="2" /><br /><br />
 
                     Gender:<div onChange={this.setGender}>
-                    <input type="radio" value="male" 
-                                   checked={this.state.gender === "male"} name="gender"  />Male
-                <input type="radio" value="female" checked={this.state.gender === "female"} name="gender"  />Female<br /><br />
+                    <input type="radio" value="male" checked={this.state.gender === "male"} name="gender" />Male
+                <input type="radio" value="female" checked={this.state.gender === "female"} name="gender" />Female<br /><br />
                 </div>
 
-                    Hobbies:<input type="checkbox" onChange={this.handleChange} />Drawing
-                <input type="checkbox" onChange={this.handleChange} />Skating
-                <input type="checkbox" onChange={this.handleChange} />Coding
-                <input type="checkbox" onChange={this.handleChange} />Swimming
-                <input type="checkbox" onChange={this.handleChange} />Dancing<br /><br />
+                    Hobbies:<div onChange={this.setCheck} >
+                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes("Drawing")} value="Drawing"/>Drawing
+                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies. includes ("Skating")} value="Skating"/>Skating
+                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes ("Coding")} value="Coding"/>Coding
+                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes ("Swimming")} value="Swimming"/>Swimming
+                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes ("Dancing")} value="Dancing"/>Dancing<br /><br />
+                </div>
 
                     Favroute Color:<select value={this.state.color} name="color" onChange={this.handleChange}>
                     <option value="Red" onChange={this.handleChange}>Red</option>
@@ -140,6 +150,7 @@ export default class App extends Component {
                             <th>E-mail</th>
                             <th>Gender</th>
                             <th>address</th>
+                            <th>Hobbies</th>
                             <th>Color</th>
                             <th>phonenumber</th>
                             <th colSpan="2">Action</th>
@@ -155,6 +166,7 @@ export default class App extends Component {
                                     <td>{user.email}</td>
                                     <td>{user.gender}</td>
                                     <td>{user.address}</td>
+                                    <td>{user.hobbies}</td>
                                     <td>{user.color}</td>
                                     <td>{user.phonenumber}</td>
                                     <td>
