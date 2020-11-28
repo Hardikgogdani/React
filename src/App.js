@@ -72,7 +72,6 @@ export default class App extends Component {
     handleSubmit = () => {
         const x = this.validation();
         if (x) {
-            
             const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
             console.log(this.state);
             list.push({
