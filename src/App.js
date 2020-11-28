@@ -75,36 +75,34 @@ export default class App extends Component {
         const { firstName, lastName, email, address, gender, hobbies, color, phonenumber } = this.state;
 
         if (!this.state.firstName) {
-            this.setState({ error: { firstName: "Enter the first name!" } })
-            return false;
+            this.setState({ error: { ...this.state.error , firstName: "Enter the first name!" } })
         }
         if (!this.state.lastName) {
-            this.setState({ error: { lastName: "Enter the last name!" } })
-            return false;
+            this.setState({ error: { ...this.state.error , lastName: "Enter the last name!" } })
         }
         if (!this.state.email.includes("@")) {
-            this.setState({ error: { email: "Enter the valid email!" } })
-            return false;
+            this.setState({ error: {  ...this.state.error , email: "Enter the valid email!" } })
+            
         }
         if (!this.state.address) {
-            this.setState({ error: { address: "Enter the address!" } })
-            return false;
+            this.setState({ error: {  ...this.state.error , address: "Enter the address!" } })
+            
         }
         if (!this.state.gender) {
-            this.setState({ error: { gender: "Enter the gender!" } })
-            return false;
+            this.setState({ error: { ...this.state.error , gender: "Enter the gender!" } })
+            
         }
         if (!this.state.hobbies) {
-            this.setState({ error: { hobbies: "Enter the hobbies!" } })
-            return false;
+            this.setState({ error: {  ...this.state.error ,hobbies: "Enter the hobbies!" } })
+            
         }
         if (!this.state.color) {
-            this.setState({ error: { color: "Enter the color!" } })
-            return false;
+            this.setState({ error: {  ...this.state.error , color: "Enter the color!" } })
+            
         }
         if (!this.state.phonenumber) {
-            this.setState({ error: { phonenumber: "Enter the phonenumber!" } })
-            return false;
+            this.setState({ error: {  ...this.state.error , phonenumber: "Enter the phonenumber!" } })
+            
         }
 
         return true;
