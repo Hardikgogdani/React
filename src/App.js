@@ -174,11 +174,18 @@ export default class App extends Component {
 
     updatee = (index) => {
         const { list } = this.state
-        const v = {
-            firstName: list[index].firstName
+        const update = {
+            firstName: list[index].firstName,
+            lastName: list[index].lastName,
+            email: list[index].email,
+            gender: list[index].gender,
+            address: list[index].address,
+            color: list[index].color,
+            hobbies: list[index].hobbies,
+            phonenumber: list[index].phonenumber,
         };
 
-        this.setState({ isEditableIndex: index, ...v })
+        this.setState({ isEditableIndex: index, ...update})
     }
     render() {
         return (
