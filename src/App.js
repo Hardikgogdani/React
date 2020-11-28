@@ -23,7 +23,7 @@ export default class App extends Component {
     setCheck = (e) => {
         console.log(e.target);
         this.setState({
-            hobbies : [...this.state.hobbies, e.target.value]
+            hobbies: [...this.state.hobbies, e.target.value]
         })
     };
 
@@ -60,29 +60,36 @@ export default class App extends Component {
         }
         if (!this.state.lastName) {
             alert("enter last name!")
+            return false;
         }
         if (!this.state.email.includes("@")) {
             alert('Invalide email!')
+            return false;
         }
+            return true;
     }
 
     handleSubmit = () => {
-
-        const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
-        console.log(this.state);
-        list.push({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            address: address,
-            gender: gender,
-            hobbies: hobbies,
-            color: color,
-            phonenumber: phonenumber
-        });
-        this.setState({ list })
-        console.log(this.state)
-    };
+        const x = this.validation();
+        if (x) {
+            
+            const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
+            console.log(this.state);
+            list.push({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                address: address,
+                gender: gender,
+                hobbies: hobbies,
+                color: color,
+                phonenumber: phonenumber
+            });
+            this.setState({ list })
+            console.log(this.state)
+        
+        }
+    }
 
     deletee = (index) => {
         const { list } = this.state
@@ -120,11 +127,11 @@ export default class App extends Component {
                 </div>
 
                     Hobbies:<div onChange={this.setCheck} >
-                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes("Drawing")} value="Drawing"/>Drawing
-                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies. includes ("Skating")} value="Skating"/>Skating
-                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes ("Coding")} value="Coding"/>Coding
-                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes ("Swimming")} value="Swimming"/>Swimming
-                    <input type="checkbox"  name="hobbies" checked={this.state.hobbies.includes ("Dancing")} value="Dancing"/>Dancing<br /><br />
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Drawing")} value="Drawing" />Drawing
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Skating")} value="Skating" />Skating
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Coding")} value="Coding" />Coding
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Swimming")} value="Swimming" />Swimming
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Dancing")} value="Dancing" />Dancing<br /><br />
                 </div>
 
                     Favroute Color:<select value={this.state.color} name="color" onChange={this.handleChange}>
