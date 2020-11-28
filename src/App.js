@@ -28,9 +28,17 @@ export default class App extends Component {
     };
 
     handleChange = e => {
-        this.setState({
+
+        const payload = {
             [e.target.name]: e.target.value,
-        });
+        };
+
+        if (e.target.name === "hobbies") {
+            payload.hobbies = [...this.state.hobbies, e.target.value];
+        }
+
+        this.setState(payload);
+
     };
     handleReset = () => {
         this.setState({
@@ -54,6 +62,7 @@ export default class App extends Component {
     };
 
     validation = () => {
+        const {firstName, lastName,email,address,gender,hobbies,color,phonenumber} = this.state;
         if (!this.state.firstName) {
             window.alert("enter first name!")
             return false;
@@ -67,6 +76,41 @@ export default class App extends Component {
             return false;
         }
         return true;
+        const validState = {
+            lblFirstName: false,
+            lblLastName: false,
+            lblAddress: false,
+            lblGender : false,
+            lblEmail : false,
+            lblHobbies : false,
+            lblColor : false,
+            lblPhonenumber : false
+        }
+        if(!firstName) {
+            ValidityState.lblFirstName = true;
+        }
+        if(!lastName) {
+            ValidityState.lblLastName = true;
+        }
+        if(!email) {
+            ValidityState.lblEmail = true;
+        }
+        if(!address) {
+            ValidityState.lblAddress  = true;
+        }
+        if(!gender) {
+            ValidityState.lblGender = true;
+        }
+        if(!hobbies) {
+            ValidityState.lblHobbies = true;
+        }
+        if(!color) {
+            ValidityState.lblColor = true;
+        }
+        if(!phonenumber) {
+            ValidityState.lblPhonenumber = true;
+        }
+        this.setState(ValidityState);
     }
 
     handleSubmit = () => {
@@ -98,31 +142,27 @@ export default class App extends Component {
 
     updatee = (index) => {
         const { list } = this.state
-        this.state.firstName = list[index].firstName;
-        this.state.lastName = list[index].lastName;
-        this.state.email = list[index].email;
-        this.state.gender = list[index].gender;
-        this.state.address = list[index].address;
-        this.state.hobbies = list[index].hobbies;
-        this.state.color = list[index].color;
-        this.state.phonenumber = list[index].phonenumber;
-        this.setState({ isEditableIndex: index })
+        const v = {
+            firstName: list[index].firstName
+        };
+
+        this.setState({ isEditableIndex: index, ...v })
     }
     render() {
         return (
             <React.Fragment>
                 <h1>Registration form</h1>
-                    First name:<input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} /><br /><br />
+                    First name:<input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} /><span style={{color: "red"}}>Hi</span><br /><br />
+                    
+                    Last name:<input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange} /><span style={{color: "red"}}>Hi</span><br /><br />
 
-                    Last name:<input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange} /><br /><br />
+                    E-mail:<input type="text" value={this.state.email} name="email" onChange={this.handleChange} /><span style={{color: "red"}}>Hi</span><br /><br />
 
-                    E-mail:<input type="text" value={this.state.email} name="email" onChange={this.handleChange} /><br /><br />
-
-                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} maxLength="50" cols="45" rows="2" /><br /><br />
+                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} maxLength="50" cols="45" rows="2" /><span style={{color: "red"}}>Hi</span><br /><br />
 
                     Gender:<div onChange={this.setGender}>
-                    <input type="radio" value="male" checked={this.state.gender === "male"} name="gender" />Male
-                <input type="radio" value="female" checked={this.state.gender === "female"} name="gender" />Female<br /><br />
+                    <input type="radio" value="male" checked={this.state.gender === "male"} name="gender"  checked/>Male
+                <input type="radio" value="female" checked={this.state.gender === "female"} name="gender" />Female<span style={{color: "red"}}>Hi</span><br /><br />
                 </div>
 
                     Hobbies:<div onChange={this.setCheck} >
@@ -130,10 +170,10 @@ export default class App extends Component {
                     <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Skating")} value="Skating" />Skating
                     <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Coding")} value="Coding" />Coding
                     <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Swimming")} value="Swimming" />Swimming
-                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Dancing")} value="Dancing" />Dancing<br /><br />
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Dancing")} value="Dancing" />Dancing <span style={{color: "red"}}>Hi</span><br /><br />
                 </div>
 
-                    Favroute Color:<select value={this.state.color} name="color" onChange={this.handleChange}>
+                    Favroute Color:<select value={this.state.color} name="color" onChange={this.handleChange}><span style={{color: "red"}}>Hi</span>
                     <option value="Red" onChange={this.handleChange}>Red</option>
                     <option value="green" onChange={this.handleChange}>Green</option>
                     <option value="Black" onChange={this.handleChange}>Black</option>
@@ -141,7 +181,7 @@ export default class App extends Component {
                     <option value="lightgreen" onChange={this.handleChange}>lightgreen</option>
                 </select><br /><br />
 
-                    Phone Number : <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <br /><br />
+                    Phone Number : <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <span style={{color: "red"}}>Hi</span><br /><br />
 
                 <button onClick={this.handleSubmit}>Submit</button>
 
