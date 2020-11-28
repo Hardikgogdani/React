@@ -66,13 +66,12 @@ export default class App extends Component {
             alert('Invalide email!')
             return false;
         }
-            return true;
+        return true;
     }
 
     handleSubmit = () => {
         const x = this.validation();
         if (x) {
-            
             const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
             console.log(this.state);
             list.push({
@@ -87,7 +86,7 @@ export default class App extends Component {
             });
             this.setState({ list })
             console.log(this.state)
-        
+
         }
     }
 
