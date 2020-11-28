@@ -13,7 +13,17 @@ export default class App extends Component {
         phonenumber: "",
         hobbies: "",
         list: [],
-        isEditableIndex: null
+        isEditableIndex: null,
+        error: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            address: "",
+            color: "",
+            gender: "",
+            phonenumber: "",
+            hobbies: ""
+        }
     };
     setGender = (e) => {
         this.setState({
@@ -54,60 +64,82 @@ export default class App extends Component {
         });
     };
 
-    isValidate = () => {
-        const isValid = this.validation();
-        if (isValid) {
-            console.log(this.state);
-        }
-    };
+    // isValidate = () => {
+    //     const isValid = this.validation();
+    //     if (isValid) {
+    //         console.log(this.state);
+    //     }
+    // };
 
     validation = () => {
-        const {firstName, lastName,email,address,gender,hobbies,color,phonenumber} = this.state;
+        const { firstName, lastName, email, address, gender, hobbies, color, phonenumber } = this.state;
+
         if (!this.state.firstName) {
-            window.alert("enter first name!")
+            this.setState({ error: { firstName: "Enter the first name!" } })
             return false;
         }
         if (!this.state.lastName) {
-            alert("enter last name!")
+            this.setState({ error: { lastName: "Enter the last name!" } })
             return false;
         }
         if (!this.state.email.includes("@")) {
-            alert('Invalide email!')
+            this.setState({ error: { email: "Enter the valid email!" } })
             return false;
         }
+        if (!this.state.address) {
+            this.setState({ error: { address: "Enter the address!" } })
+            return false;
+        }
+        if (!this.state.gender) {
+            this.setState({ error: { gender: "Enter the gender!" } })
+            return false;
+        }
+        if (!this.state.hobbies) {
+            this.setState({ error: { hobbies: "Enter the hobbies!" } })
+            return false;
+        }
+        if (!this.state.color) {
+            this.setState({ error: { color: "Enter the color!" } })
+            return false;
+        }
+        if (!this.state.phonenumber) {
+            this.setState({ error: { phonenumber: "Enter the phonenumber!" } })
+            return false;
+        }
+
         return true;
         const validState = {
             lblFirstName: false,
             lblLastName: false,
             lblAddress: false,
-            lblGender : false,
-            lblEmail : false,
-            lblHobbies : false,
-            lblColor : false,
-            lblPhonenumber : false
+            lblGender: false,
+            lblEmail: false,
+            lblHobbies: false,
+            lblColor: false,
+            lblPhonenumber: false
         }
-        if(!firstName) {
+        if (!firstName) {
             ValidityState.lblFirstName = true;
         }
-        if(!lastName) {
+        if (!lastName) {
             ValidityState.lblLastName = true;
         }
-        if(!email) {
+        if (!email) {
             ValidityState.lblEmail = true;
         }
-        if(!address) {
-            ValidityState.lblAddress  = true;
+        if (!address) {
+            ValidityState.lblAddress = true;
         }
-        if(!gender) {
+        if (!gender) {
             ValidityState.lblGender = true;
         }
-        if(!hobbies) {
+        if (!hobbies) {
             ValidityState.lblHobbies = true;
         }
-        if(!color) {
+        if (!color) {
             ValidityState.lblColor = true;
         }
-        if(!phonenumber) {
+        if (!phonenumber) {
             ValidityState.lblPhonenumber = true;
         }
         this.setState(ValidityState);
@@ -152,17 +184,17 @@ export default class App extends Component {
         return (
             <React.Fragment>
                 <h1>Registration form</h1>
-                    First name:<input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} /><span style={{color: "red"}}>Hi</span><br /><br />
-                    
-                    Last name:<input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange} /><span style={{color: "red"}}>Hi</span><br /><br />
+        First name:<input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} /><span style={{ color: "red" }}>{this.state.error.firstName}</span><br /><br />
 
-                    E-mail:<input type="text" value={this.state.email} name="email" onChange={this.handleChange} /><span style={{color: "red"}}>Hi</span><br /><br />
+                    Last name:<input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange} /><span style={{ color: "red" }}>{this.state.error.lastName}</span><br /><br />
 
-                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} maxLength="50" cols="45" rows="2" /><span style={{color: "red"}}>Hi</span><br /><br />
+                    E-mail:<input type="text" value={this.state.email} name="email" onChange={this.handleChange} /><span style={{ color: "red" }}>{this.state.error.email}</span><br /><br />
+
+                    Address:<textarea type="text" value={this.state.address} name="address" onChange={this.handleChange} maxLength="50" cols="45" rows="2" /><span style={{ color: "red" }}>{this.state.error.address}</span><br /><br />
 
                     Gender:<div onChange={this.setGender}>
-                    <input type="radio" value="male" checked={this.state.gender === "male"} name="gender"  checked/>Male
-                <input type="radio" value="female" checked={this.state.gender === "female"} name="gender" />Female<span style={{color: "red"}}>Hi</span><br /><br />
+                    <input type="radio" value="male" checked={this.state.gender === "male"} name="gender" checked />Male
+                <input type="radio" value="female" checked={this.state.gender === "female"} name="gender" />Female<span style={{ color: "red" }}>{this.state.error.gender}</span><br /><br />
                 </div>
 
                     Hobbies:<div onChange={this.setCheck} >
@@ -170,18 +202,18 @@ export default class App extends Component {
                     <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Skating")} value="Skating" />Skating
                     <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Coding")} value="Coding" />Coding
                     <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Swimming")} value="Swimming" />Swimming
-                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Dancing")} value="Dancing" />Dancing <span style={{color: "red"}}>Hi</span><br /><br />
+                    <input type="checkbox" name="hobbies" checked={this.state.hobbies.includes("Dancing")} value="Dancing" />Dancing <span style={{ color: "red" }}>{this.state.error.hobbies}</span><br /><br />
                 </div>
 
-                    Favroute Color:<select value={this.state.color} name="color" onChange={this.handleChange}><span style={{color: "red"}}>Hi</span>
+                    Favroute Color:<select value={this.state.color} name="color" onChange={this.handleChange}><span style={{ color: "red" }}>{this.state.error.color}</span>
                     <option value="Red" onChange={this.handleChange}>Red</option>
                     <option value="green" onChange={this.handleChange}>Green</option>
-                    <option value="Black" onChange={this.handleChange}>Black</option>
+                    <option value="Black" onChange={this.handleChange} >Black</option>
                     <option value="lightred" onChange={this.handleChange}>lightred</option>
                     <option value="lightgreen" onChange={this.handleChange}>lightgreen</option>
                 </select><br /><br />
 
-                    Phone Number : <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <span style={{color: "red"}}>Hi</span><br /><br />
+                    Phone Number : <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <span style={{ color: "red" }}>{this.state.error.phonenumber}</span><br /><br />
 
                 <button onClick={this.handleSubmit}>Submit</button>
 
