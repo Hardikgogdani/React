@@ -4,7 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 let list1 = [];
 export default class App extends Component {
-
+    // State is define here and all used were here
     state = {
         firstName: "",
         lastName: "",
@@ -27,23 +27,26 @@ export default class App extends Component {
             hobbies: ""
         }
     };
+
+    // Before rendering the component i use component did mount here.
     componentDidMount() {
 
         list1 = [];
-        if(JSON.parse(localStorage.getItem("list")) !== null ) {
+        if (JSON.parse(localStorage.getItem("list")) !== null) {
             list1 = JSON.parse(localStorage.getItem("list"));
 
         };
-        this.setState({list: list1});
+        this.setState({ list: list1 });
 
     }
 
-
+    // herer setGender is a function for checking or validate for selecting one from afterAll.
     setGender = (e) => {
         this.setState({
             gender: e.target.value
         })
     };
+    // here setCheck is for checking all check box and showing in table which is below.
     setCheck = (e) => {
         console.log(e.target);
         this.setState({
@@ -51,6 +54,7 @@ export default class App extends Component {
         })
     };
 
+    // handleChange is for by clicking the button then it will chencge the state of the behaviour of the input Fild.
     handleChange = e => {
 
         const payload = {
@@ -64,6 +68,7 @@ export default class App extends Component {
         this.setState(payload);
 
     };
+    // validation of input field is here/
 
     validation = () => {
         const { firstName, lastName, email, address, gender, hobbies, color, phonenumber } = this.state;
@@ -104,14 +109,15 @@ export default class App extends Component {
         }
         this.setState({ error })
         return isError;
-        
+
     }
+    // handlesubmit is for pushing data into table and extra velidation is also apply.
 
     handleSubmit = () => {
         const x = this.validation();
         const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
-
-        if(localStorage.getItem('list')){
+        // checking if local storage having any data or not if data present then data will not push into table..
+        if (localStorage.getItem('list')) {
             list.push({
                 firstName: firstName,
                 lastName: lastName,
@@ -122,11 +128,12 @@ export default class App extends Component {
                 color: color,
                 phonenumber: phonenumber
             });
-            localStorage.setItem('list',JSON.stringify(list));
+            localStorage.setItem('list', JSON.stringify(list));
         }
-        else{
-            if(!x) {
-                if(!localStorage.getItem('list')){
+        // pusing of data into table is here/
+        else {
+            if (!x) {
+                if (!localStorage.getItem('list')) {
                     list.push({
                         firstName: firstName,
                         lastName: lastName,
@@ -137,11 +144,12 @@ export default class App extends Component {
                         color: color,
                         phonenumber: phonenumber
                     });
-                } 
+                }
                 this.setState({ list })
-                localStorage.setItem('list',JSON.stringify(list));
+                localStorage.setItem('list', JSON.stringify(list));
             }
         }
+        // reseting of form is below
         this.setState({
             firstName: '',
             lastName: "",
@@ -154,16 +162,17 @@ export default class App extends Component {
         });
     }
 
-
+    // delete button in table so his function uis here.
     deletee = (index) => {
         list1 = JSON.parse(localStorage.getItem('list'));
         const { list } = this.state
         list.splice(index, 1);
         this.setState({ list })
         localStorage.removeItem('list');
-        
+
     }
 
+    // update button function is here.
     updatee = (index) => {
 
         const { list } = this.state
@@ -182,6 +191,7 @@ export default class App extends Component {
     }
     render() {
         return (
+            //creation of form without form attribute is here.
             <React.Fragment>
                 <h1>Registration form</h1>
                     First name:<input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} /><span style={{ color: "red" }}>{this.state.error.firstName}</span><br /><br />
@@ -234,6 +244,7 @@ export default class App extends Component {
 
                     <tbody>
                         {
+                            // table row and cell creation is here in that edit and delete button also reside in this.
                             this.state.list.map((user, index) => (
                                 <tr key={index}>
                                     <td>{user.firstName}</td>
