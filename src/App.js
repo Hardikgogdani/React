@@ -68,32 +68,42 @@ export default class App extends Component {
     validation = () => {
         const { firstName, lastName, email, address, gender, hobbies, color, phonenumber } = this.state;
         const error = {};
+        let isError = false;
 
         if (firstName === "") {
             error.firstName = "Enter the first name!";
+            isError = true;
         }
         if (lastName === "") {
             error.lastName = "Enter the last name!";
+            isError = true;
         }
         if (!email.includes("@")) {
             error.email = "Enter the Valid E-mail!";
+            isError = true;
         }
         if (address === "") {
             error.address = "Enter the address!";
+            isError = true;
         }
         if (gender === "") {
             error.gender = "select the Gender!";
+            isError = true;
         }
         if (hobbies === "") {
             error.hobbies = "check your Hobbies!";
+            isError = true;
         }
         if (color === "") {
             error.color = "Enter your favroute Color!";
+            isError = true;
         }
         if (phonenumber === "") {
             error.phonenumber = "Enter your Phonenumber!";
+            isError = true;
         }
         this.setState({ error })
+        return isError;
         
     }
 
@@ -101,20 +111,20 @@ export default class App extends Component {
         const x = this.validation();
         const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
 
-        // if(!localStorage.getItem('list')){
-        //     list.push({
-        //         firstName: firstName,
-        //         lastName: lastName,
-        //         email: email,
-        //         address: address,
-        //         gender: gender,
-        //         hobbies: hobbies,
-        //         color: color,
-        //         phonenumber: phonenumber
-        //     });
-        //     localStorage.setItem('list',JSON.stringify(list));
-        // }
-        // else{
+        if(localStorage.getItem('list')){
+            list.push({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                address: address,
+                gender: gender,
+                hobbies: hobbies,
+                color: color,
+                phonenumber: phonenumber
+            });
+            localStorage.setItem('list',JSON.stringify(list));
+        }
+        else{
             if(!x) {
                 if(!localStorage.getItem('list')){
                     list.push({
@@ -131,7 +141,7 @@ export default class App extends Component {
                 this.setState({ list })
                 localStorage.setItem('list',JSON.stringify(list));
             }
-        // }
+        }
         this.setState({
             firstName: '',
             lastName: "",
@@ -167,7 +177,7 @@ export default class App extends Component {
             hobbies: list[index].hobbies,
             phonenumber: list[index].phonenumber,
         };
-
+        list1 = JSON.parse(localStorage.getItem('list'));
         this.setState({ isEditableIndex: index, ...update })
     }
     render() {
