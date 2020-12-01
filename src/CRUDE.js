@@ -186,7 +186,7 @@ export default class CRUDE extends Component {
             hobbies: list[index].hobbies,
             phonenumber: list[index].phonenumber,
         };
-        list1 = JSON.parse(localStorage.getItem('list'));
+        // list1 = JSON.parse(localStorage.getItem('list'));
         this.setState({ isEditableIndex: index, ...update })
     }
     render() {
