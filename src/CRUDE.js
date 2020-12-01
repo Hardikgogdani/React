@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
-
 let list1 = [];
 export default class CRUDE extends Component {
     // State is define here and all used were here
@@ -232,7 +231,7 @@ export default class CRUDE extends Component {
 
                     Phone Number : <input type="tel" maxlength="10" value={this.state.phonenumber} onChange={this.handleChange} name="phonenumber" /> <span style={{ color: "red" }}>{this.state.error.phonenumber}</span><br /><br />
 
-                <button onClick={this.handleSubmit}>Submit</button>
+                <button onClick={this.handleSubmit} href="/table">Submit</button>
 
                 <table border="1px solid">
                     <thead>
@@ -272,6 +271,7 @@ export default class CRUDE extends Component {
                     </tbody>
 
                 </table>
+               
 
             </React.Fragment>
         )

@@ -1,10 +1,8 @@
-#btnsubmit{
-  color: red;
-  background-color: black;
-  width: 5%;
+#table-border{
+  border: black;
+  padding-left: 50%;
 }
-
-table{
-  border: 1px solid;
-  width: 20%;
+#buttonadd{
+  margin-left: 80%;
+  
 }
