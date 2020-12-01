@@ -115,9 +115,13 @@ export default class CRUDE extends Component {
 
     handleSubmit = () => {
         const x = this.validation();
-        const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list } = this.state
+        const { firstName, lastName, email, gender, address, color, hobbies, phonenumber, list,isEditableIndex } = this.state
         // checking if local storage having any data or not if data present then data will not push into table..
-        if (localStorage.getItem('list')) {
+        if(isEditableIndex !== null && isEditableIndex !== -1){
+            list[isEditableIndex] = this.state;
+            this.setState({list, isEditableIndex : null});
+        }
+        else if (localStorage.getItem('list')) {
             list.push({
                 firstName: firstName,
                 lastName: lastName,
