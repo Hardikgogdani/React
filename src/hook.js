@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 
@@ -9,26 +9,15 @@ const Hook = () => {
         lastName: "",
         address: "",
         gender: "",
-        age :"",
-        country:"",
-        
+        age: "",
+        country: "",
+
     });
     const [list, setList] = useState([]);
     const [showForm, setShowForm] = useState(true)
     const [editableIndex, setEditableIndex] = useState(null);
     const [error, setError] = useState({});
-    // const [storage , setStorage] = useEffect{};
-    // const setGender = (e) => {
-    //     setUserDetail({
-    //         gender: e.target.value
-    //     })
-    // };
-    // // here setCheck is for checking all check box and showing in table which is below.
-    // const setCheck = (e) => {
-    //     setUserDetail({
-    //         active: e.target.value
-    //     })
-    // };
+
     const validation = () => {
         let iserror = false;
         const error1 = {};
@@ -56,7 +45,7 @@ const Hook = () => {
             error1.country = "Any one country should be selected";
             iserror = true;
         }
-        if(userDetail.agree ===""){
+        if (userDetail.agree === "") {
             error1.agree = "you must agree first";
             return true;
         }
@@ -71,9 +60,9 @@ const Hook = () => {
         const { name, value, checked } = e.target;
         if (name === "active") {
             setUserDetail({ ...userDetail, [name]: checked })
-        } else if(name ==="gender"){
+        } else if (name === "gender") {
             setUserDetail({ ...userDetail, [name]: value })
-        }else{
+        } else {
             setUserDetail({ ...userDetail, [name]: value })
         }
     }
@@ -91,6 +80,9 @@ const Hook = () => {
 
     const submitValue = () => {
         const x = validation();
+        if (x) {
+            return
+        }
         if (editableIndex !== null) {
             list[editableIndex] = userDetail
         } else if (!x) {
