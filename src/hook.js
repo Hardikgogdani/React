@@ -78,8 +78,7 @@ const Hook = () => {
 
     const onDelete = (index) => {
         setList(list.filter((value, i) => i !== index))
-        localStorage.setItem('list', JSON.stringify(list));
-        localStorage.removeItem('list');
+        localStorage.setItem('list', JSON.stringify(list));      
     }
 
     const onEdit = (index) => {
