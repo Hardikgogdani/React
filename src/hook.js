@@ -45,10 +45,10 @@ const Hook = () => {
             error1.country = "Any one country should be selected";
             iserror = true;
         }
-        if (userDetail.agree === "") {
-            error1.agree = "you must agree first";
-            return true;
-        }
+        // if (userDetail.agree === "") {
+        //     error1.agree = "you must agree first";
+        //     return true;
+        // }
         setError(error1)
         return iserror;
     }
@@ -57,10 +57,11 @@ const Hook = () => {
     }
 
     const handleChange = e => {
-        const { name, value, checked } = e.target;
-        if (name === "active") {
-            setUserDetail({ ...userDetail, [name]: checked })
-        } else if (name === "gender") {
+        const { name, value } = e.target;
+        // if (name === "active") {
+        //     setUserDetail({ ...userDetail, [name]: checked })
+        // } else 
+        if (name === "gender") {
             setUserDetail({ ...userDetail, [name]: value })
         } else {
             setUserDetail({ ...userDetail, [name]: value })
@@ -152,7 +153,7 @@ const Hook = () => {
                     <option value="UK">UK</option>
                 </select><span style={{ color: "red" }}>{error.country}</span><br /><br />
 
-                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange} /><span style={{ color: "red" }}>{error.agree}</span><br /><br />
+                <b>IS Agree :</b>: <input type="checkbox" checked name="active" onChange={handleChange} /><br /><br />
 
                 <button className="btn-primary" onClick={submitValue}>Submit</button>
             </div>}
