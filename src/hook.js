@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 
@@ -6,32 +6,32 @@ const Hook = () => {
     const [userDetail, setUserDetail] = useState({});
     const [list, setList] = useState([]);
 
-    const [showResults, setShowResults] = React.useState(true)
+    const [showForm, setShowForm] = React.useState(true)
 
     const onAdd = () => {
-        setShowResults(!showResults)
+        setShowForm(!showForm)
     }
 
     const handleChange = e => {
-        const {name, value,checked} = e.target;
-        if(name === "active" ){
-            setUserDetail({...userDetail, [name]: checked})
-        }else{
-            setUserDetail({...userDetail, [name]: value})
+        const { name, value, checked } = e.target;
+        if (name === "active") {
+            setUserDetail({ ...userDetail, [name]: checked })
+        } else {
+            setUserDetail({ ...userDetail, [name]: value })
         }
 
     }
 
     const onDelete = (index) => {
-        setList(list.filter((value,i) => i !== index))
+        setList(list.filter((value, i) => i !== index))
     }
 
-    const onEdit = () => {
-
+    const onEdit = (index) => {
+        setShowForm(!showForm)
     }
 
     const submitValue = () => {
-        setShowResults(!showResults)
+        setShowForm(!showForm)
         setList([...list, userDetail])
         setUserDetail({})
     }
@@ -42,56 +42,56 @@ const Hook = () => {
             <div className="row table-responsive">
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th colSpan="2">Action</th>
-                    </tr>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th colSpan="2">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {
-                        list.map((value, index) => (
-                            <tr key={index}>
-                                <td>{value.firstName}</td>
-                                <td>{value.lastName}</td>
-                                <td>{value.age}</td>
-                                <td>
-                                    <button onClick={()=>{onEdit(index)}}>Edit</button>
-                                    <button onClick={()=>onDelete(index)}>Delete</button>
-                                </td>
+                        {
+                            list.map((value, index) => (
+                                <tr key={index}>
+                                    <td>{value.firstName}</td>
+                                    <td>{value.lastName}</td>
+                                    <td>{value.age}</td>
+                                    <td>
+                                        <button onClick={() => {onEdit(index) }}>Edit</button>
+                                        <button onClick={() => {onDelete(index)}}>Delete</button>
+                                    </td>
 
-                            </tr>
-                        ))
-                    }
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>
-            <br/>
-            {showResults && <div className="col-md-6">
+            <br />
+            {showForm && <div className="col-md-6">
                 <h2>Registration Form</h2><br />
 
                 <b>FIRST NAME</b> : <input type="text" name="firstName" value={userDetail.firstName || ''}
-                                           onChange={handleChange}/><br/><br/>
+                    onChange={handleChange} /><br /><br />
                 <b>LAST NAME</b> : <input type="text" name="lastName" value={userDetail.lastName || ''}
-                                          onChange={handleChange}/><br/><br/>
+                    onChange={handleChange} /><br /><br />
                 <b>AGE</b> : <input type="text" name="age" value={userDetail.age || ''}
-                                    onChange={handleChange}/><br/><br/>
-                <b>GENDER</b> :{' '}<input type="radio" name="gender" checked={userDetail.gender === "male"} onChange={handleChange} value="male"/>Male{' '}
-                <input type="radio" name="gender" checked={userDetail.gender === "female"} onChange={handleChange} value="female"/>Female{' '}
-                <input type="radio" name="gender" checked={userDetail.gender === "other"} onChange={handleChange} value="other"/>Other<br/><br/>
+                    onChange={handleChange} /><br /><br />
+                <b>GENDER</b> :{' '}<input type="radio" name="gender" checked={userDetail.gender === "male"} onChange={handleChange} value="male" />Male{' '}
+                <input type="radio" name="gender" checked={userDetail.gender === "female"} onChange={handleChange} value="female" />Female{' '}
+                <input type="radio" name="gender" checked={userDetail.gender === "other"} onChange={handleChange} value="other" />Other<br /><br />
                 <b>ADDRESS</b> : <input type="text" name="address" value={userDetail.address || ''}
-                                        onChange={handleChange}/><br/><br/>
+                    onChange={handleChange} /><br /><br />
                 <b>COUNTRY</b>:{' '}<select name="country" value={userDetail.country || ''} onChange={handleChange}>
-                <option value="India">India</option>
-                <option value="Brazil">Brazil</option>
-                <option value="USA">USA</option>
-                <option value="Dubai">Dubai</option>
-                <option value="UK">UK</option>
-            </select><br/><br/>
-                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange}/><br/><br/>
+                    <option value="India">India</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="USA">USA</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="UK">UK</option>
+                </select><br /><br />
+                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange} /><br /><br />
 
-                <button  className="btn-primary" onClick={submitValue}>Submit</button>
+                <button className="btn-primary" onClick={submitValue}>Submit</button>
             </div>}
         </div>
     )
