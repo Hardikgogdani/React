@@ -3,72 +3,68 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Hook = () => {
     const state = {
-        firstName :"",
+        firstName: "",
         lastName: "",
-        age:"",
+        age: "",
         gender: "",
         address: "",
-        country:"",
-        isActive:""
+        country: "",
+        isActive: ""
     }
     return (
         //creation of form without form attribute is here.
         <>
-        <div className="container">
-        <table className="table">
-                <thead>
-                    <td>
-                        <h1>Registration Form</h1><br />
-
-                        First name:<input type="text" name="firstName" className="form-control"/><br />
-
-                        Last name:<input type="text" name="lastName" className="form-control"/><br />
-
-                        Age:<input type="text" name="age" className="form-control"/><br />
-
-                        Gender:
-                                <input type="radio" value="male" name="gender" />Male
-                                <input type="radio" value="female" name="gender" />Female
-                                <input type="radio" value="other" name="gender" />Other<br />
-
-                        Address:<textarea type="text" name="address" maxLength="50" cols="45" rows="2" className="form-control"/><br />
-
-                        Country:<select name="country" className="form-control">
-                            <option value="India" >India</option>
-                            <option value="USA" >USA</option>
-                            <option value="Brasil"  >Brasil</option>
-                            <option value="Dubai" >Dubai</option>
-                            <option value="UK">UK</option></select><br />
-
-                        IsActive : <input type="checkbox" name="isactive" value="isactive" /><br />
-
-                        <button className="btn-primary">Submit</button>
-
-                    </td>
-                    <td id="table-border">
-
-                        <h1>List</h1>
-
-                        <button className="btn-primary">Add New</button>
-                        <table className="table" border="1px solid">
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Age</th>
-                                <th colSpan="2">Action</th>
-                            </tr>
+            <div className="container">
+                <button className="btn-primary" type="button" data-target="#hideen" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">Add New</button>
+                <div className="row">
+                    <div className="table-responsive">
+                        <table className="table">
+                            <thead>
+                                <tr className="table-striped">
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Age</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                
+
                             </tbody>
+                        </table><br />
+                    </div>
+                </div>
+                <div className="row>">
 
-                        </table>
+                    <div className="col-md-6" id="hideen">
+                        <h2>Registration Form</h2> <br />
+                First name: <br />
+                        <input className="form-control" name="firstname" type="text" placeholder="Enter YourFirst Name" /><br />
+                Last name: <br />
+                        <input className="form-control" name="lastname" type="text" placeholder="Enter YourLast Name" /><br />
+                Age :<br />
+                        <input className="form-control" type="text" name="age" placeholder="Enter Your Age" /><br />
+                Gender : <br />
+                        <input type="radio" name="gender" value="male" />Male
+                <input type="radio" name="gender" value="female" />Female
+                <input type="radio" name="gender" value="others" />Others<br /><br />
+                Address : <br />
+                        <textarea className="form-control" cols="25" rows="4" placeholder="Enter Your Address">
+                        </textarea>
+                Country : <br />
+                        <select className="form-control" name="country" id="country" required>
+                            <option>Select Your Country</option>
+                            <option value="India">India</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                            <option value="Dubai">Dubai</option>
+                        </select><br />
+                        <input type="checkbox" /> <label>I Agree the Terms & Conditions</label><br />
+                        <button className="btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
 
-
-                    </td>
-                </thead>
-            </table>
-        </div>
-            
         </>
     )
 }
