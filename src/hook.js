@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 
+
 const Hook = () => {
     const [userDetail, setUserDetail] = useState({});
     const [list, setList] = useState([]);
 
-    const [showForm, setShowForm] = React.useState(true)
-
+    const [showForm, setShowForm] = useState(true)
+    const [editableIndex, setEditableIndex] = useState(null);
     const onAdd = () => {
         setShowForm(!showForm)
     }
@@ -27,12 +28,19 @@ const Hook = () => {
     }
 
     const onEdit = (index) => {
-        setShowForm(!showForm)
+        setUserDetail(!showForm)
+        setUserDetail(list[index])
+        setList(list)
+        setEditableIndex(index)
     }
 
     const submitValue = () => {
-        setShowForm(!showForm)
-        setList([...list, userDetail])
+        setUserDetail(!showForm)
+        if(editableIndex !== null){
+            list[editableIndex] = userDetail
+        }else{
+            setList([...list, userDetail])
+        }
         setUserDetail({})
     }
 
