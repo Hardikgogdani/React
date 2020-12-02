@@ -4,11 +4,54 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 
 const Hook = () => {
-    const [userDetail, setUserDetail] = useState({});
+    const [userDetail, setUserDetail] = useState({
+        firstName: "",
+        lastName: "",
+        address: "",
+        gender: "",
+        age :"",
+        country:"",
+        agree:""
+    });
     const [list, setList] = useState([]);
-
     const [showForm, setShowForm] = useState(true)
     const [editableIndex, setEditableIndex] = useState(null);
+    const [error, setError] = useState({});
+
+    const validation = () => {
+        let iserror = false;
+        const error1 = {};
+        if (userDetail.firstName === "") {
+            error1.firstName = "First Name required";
+            iserror = true;
+        }
+        if (userDetail.lastName === "") {
+            error1.lastName = "Last Name required";
+            iserror = true;
+        }
+        if (userDetail.age === "") {
+            error1.age = "age required";
+            iserror = true;
+        }
+        if (userDetail.gender) {
+            error1.gender = "Gender required";
+            iserror = true;
+        }
+        if (userDetail.address === "") {
+            error1.address = "address required";
+            iserror = true;
+        }
+        if (userDetail.country === "") {
+            error1.country = "country required";
+            iserror = true;
+        }
+        if(userDetail.agree ===""){
+            error1.agree = "you must agree first";
+        }
+        console.log(error1);
+        setError(error1)
+        return iserror;
+    }
     const onAdd = () => {
         setShowForm(!showForm)
     }
@@ -28,20 +71,22 @@ const Hook = () => {
     }
 
     const onEdit = (index) => {
-        setUserDetail(!showForm)
+        setShowForm(!showForm)
         setUserDetail(list[index])
         setList(list)
         setEditableIndex(index)
     }
 
     const submitValue = () => {
-        setUserDetail(!showForm)
-        if(editableIndex !== null){
+        const x = validation();
+        if (editableIndex !== null) {
             list[editableIndex] = userDetail
-        }else{
+        } else if (!x) {
             setList([...list, userDetail])
+            setShowForm(!showForm)
         }
         setUserDetail({})
+        setEditableIndex(null)
     }
 
     return (
@@ -79,25 +124,31 @@ const Hook = () => {
             {showForm && <div className="col-md-6">
                 <h2>Registration Form</h2><br />
 
-                <b>FIRST NAME</b> : <input type="text" name="firstName" value={userDetail.firstName || ''}
-                    onChange={handleChange} /><br /><br />
-                <b>LAST NAME</b> : <input type="text" name="lastName" value={userDetail.lastName || ''}
-                    onChange={handleChange} /><br /><br />
-                <b>AGE</b> : <input type="text" name="age" value={userDetail.age || ''}
-                    onChange={handleChange} /><br /><br />
+                <b>FIRST NAME</b> : <input type="text" name="firstName" value={userDetail.firstName}
+                    onChange={handleChange} /><span style={{ color: "red" }}>{error.firstName}</span><br /><br />
+
+                <b>LAST NAME</b> : <input type="text" name="lastName" value={userDetail.lastName}
+                    onChange={handleChange} /><span style={{ color: "red" }}>{error.lastName}</span><br /><br />
+
+                <b>AGE</b> : <input type="text" name="age" value={userDetail.age}
+                    onChange={handleChange} /><span style={{ color: "red" }}>{error.age}</span><br /><br />
+
                 <b>GENDER</b> :{' '}<input type="radio" name="gender" checked={userDetail.gender === "male"} onChange={handleChange} value="male" />Male{' '}
                 <input type="radio" name="gender" checked={userDetail.gender === "female"} onChange={handleChange} value="female" />Female{' '}
-                <input type="radio" name="gender" checked={userDetail.gender === "other"} onChange={handleChange} value="other" />Other<br /><br />
-                <b>ADDRESS</b> : <input type="text" name="address" value={userDetail.address || ''}
-                    onChange={handleChange} /><br /><br />
-                <b>COUNTRY</b>:{' '}<select name="country" value={userDetail.country || ''} onChange={handleChange}>
+                <input type="radio" name="gender" checked={userDetail.gender === "other"} onChange={handleChange} value="other" />Other<span style={{ color: "red" }}>{error.gender}</span><br /><br />
+
+                <b>ADDRESS</b> : <input type="text" name="address" value={userDetail.address}
+                    onChange={handleChange} /><span style={{ color: "red" }}>{error.address}</span><br /><br />
+
+                <b>COUNTRY</b>:{' '}<select name="country" value={userDetail.country} onChange={handleChange}>
                     <option value="India">India</option>
                     <option value="Brazil">Brazil</option>
                     <option value="USA">USA</option>
                     <option value="Dubai">Dubai</option>
                     <option value="UK">UK</option>
-                </select><br /><br />
-                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange} /><br /><br />
+                </select><span style={{ color: "red" }}>{error.country}</span><br /><br />
+
+                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange} /><span style={{ color: "red" }}>{error.agree}</span><br /><br />
 
                 <button className="btn-primary" onClick={submitValue}>Submit</button>
             </div>}
