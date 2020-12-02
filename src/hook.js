@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-
-
 
 const Hook = () => {
     const [userDetail, setUserDetail] = useState({
@@ -18,6 +16,15 @@ const Hook = () => {
     const [editableIndex, setEditableIndex] = useState(null);
     const [error, setError] = useState({});
 
+
+    useEffect(() => {
+        let Data = [];
+        if (JSON.parse(localStorage.getItem("list")) !== null) {
+            Data = JSON.parse(localStorage.getItem("list"));
+        }
+        setList(Data);
+    }, [])
+
     const validation = () => {
         let iserror = false;
         const error1 = {};
@@ -29,7 +36,7 @@ const Hook = () => {
             error1.lastName = "Last Name should be written";
             iserror = true;
         }
-        if (userDetail.age === "") {
+        if (userDetail.age === "" || isNaN(userDetail.age) || userDetail.age < 1 || userDetail.age > 150) {
             error1.age = "age must required";
             iserror = true;
         }
@@ -52,6 +59,7 @@ const Hook = () => {
         setError(error1)
         return iserror;
     }
+
     const onAdd = () => {
         setShowForm(!showForm)
     }
@@ -70,6 +78,8 @@ const Hook = () => {
 
     const onDelete = (index) => {
         setList(list.filter((value, i) => i !== index))
+        localStorage.setItem('list', JSON.stringify(list));
+        localStorage.removeItem('list');
     }
 
     const onEdit = (index) => {
@@ -84,14 +94,19 @@ const Hook = () => {
         if (x) {
             return
         }
+
         if (editableIndex !== null) {
             list[editableIndex] = userDetail
-        } else if (!x) {
-            setList([...list, userDetail])
-            setShowForm(!showForm)
-        }
+        } else
+            if (!x) {
+
+                list.push(userDetail)
+                setList(list)
+            }
+        localStorage.setItem("list", JSON.stringify(list));
         setUserDetail({})
         setEditableIndex(null)
+        setShowForm(!showForm)
     }
 
     return (
@@ -139,7 +154,7 @@ const Hook = () => {
                     onChange={handleChange} /><span style={{ color: "red" }}>{error.age}</span><br /><br />
 
                 <b>GENDER</b> :{' '}<input type="radio" name="gender" checked={userDetail.gender === "male"} onChange={handleChange} value="male" />Male{' '}
-                <input type="radio" name="gender" checked={userDetail.gender === "female"} onChange={handleChange} value="female" />Female{' '}
+                <input type="radio" name="gender" checked={userDetail.gender === " female"} onChange={handleChange} value="female" />Female{' '}
                 <input type="radio" name="gender" checked={userDetail.gender === "other"} onChange={handleChange} value="other" />Other<span style={{ color: "red" }}>{error.gender}</span><br /><br />
 
                 <b>ADDRESS</b> : <input type="text" name="address" value={userDetail.address}
