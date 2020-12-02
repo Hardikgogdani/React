@@ -57,8 +57,8 @@ const Hook = () => {
                                     <td>{value.lastName}</td>
                                     <td>{value.age}</td>
                                     <td>
-                                        <button onClick={() => {onEdit(index) }}>Edit</button>
-                                        <button onClick={() => {onDelete(index)}}>Delete</button>
+                                        <button onClick={() => { onEdit(index) }}>Edit</button>
+                                        <button onClick={() => { onDelete(index) }}>Delete</button>
                                     </td>
 
                                 </tr>
