@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 
@@ -11,13 +11,24 @@ const Hook = () => {
         gender: "",
         age :"",
         country:"",
-        agree:""
+        active:""
     });
     const [list, setList] = useState([]);
     const [showForm, setShowForm] = useState(true)
     const [editableIndex, setEditableIndex] = useState(null);
     const [error, setError] = useState({});
-
+    // const [storage , setStorage] = useEffect{};
+    const setGender = (e) => {
+        setUserDetail({
+            gender: e.target.value
+        })
+    };
+    // here setCheck is for checking all check box and showing in table which is below.
+    const setCheck = (e) => {
+        setUserDetail({
+            active: e.target.value
+        })
+    };
     const validation = () => {
         let iserror = false;
         const error1 = {};
@@ -47,8 +58,8 @@ const Hook = () => {
         }
         if(userDetail.agree ===""){
             error1.agree = "you must agree first";
+            return true;
         }
-        console.log(error1);
         setError(error1)
         return iserror;
     }
@@ -133,7 +144,7 @@ const Hook = () => {
                 <b>AGE</b> : <input type="text" name="age" value={userDetail.age}
                     onChange={handleChange} /><span style={{ color: "red" }}>{error.age}</span><br /><br />
 
-                <b>GENDER</b> :{' '}<input type="radio" name="gender" checked={userDetail.gender === "male"} onChange={handleChange} value="male" />Male{' '}
+                <b>GENDER</b> :{' '}<input type="radio" name="gender" checked={userDetail.gender === "male"} onChange={setGender} value="male" />Male{' '}
                 <input type="radio" name="gender" checked={userDetail.gender === "female"} onChange={handleChange} value="female" />Female{' '}
                 <input type="radio" name="gender" checked={userDetail.gender === "other"} onChange={handleChange} value="other" />Other<span style={{ color: "red" }}>{error.gender}</span><br /><br />
 
@@ -148,7 +159,7 @@ const Hook = () => {
                     <option value="UK">UK</option>
                 </select><span style={{ color: "red" }}>{error.country}</span><br /><br />
 
-                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange} /><span style={{ color: "red" }}>{error.agree}</span><br /><br />
+                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={setCheck} /><span style={{ color: "red" }}>{error.agree}</span><br /><br />
 
                 <button className="btn-primary" onClick={submitValue}>Submit</button>
             </div>}

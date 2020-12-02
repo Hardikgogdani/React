@@ -47,7 +47,6 @@ export default class CRUDE extends Component {
     };
     // here setCheck is for checking all check box and showing in table which is below.
     setCheck = (e) => {
-        console.log(e.target);
         this.setState({
             hobbies: [...this.state.hobbies, e.target.value]
         })
