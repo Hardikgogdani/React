@@ -12,7 +12,7 @@ const Hook = () => {
 
     });
     const [list, setList] = useState([]);
-    const [showForm, setShowForm] = useState(true)
+    const [showForm, setShowForm] = useState(false)
     const [editableIndex, setEditableIndex] = useState(null);
     const [error, setError] = useState({});
 
