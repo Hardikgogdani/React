@@ -1,5 +1,5 @@
 import React from 'react';
-import Hook from './hook';
+import Hook from './Hook';
 const App = () => {
     return (
         <Hook />

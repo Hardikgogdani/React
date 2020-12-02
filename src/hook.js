@@ -5,7 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 const Hook = () => {
     const [userDetail, setUserDetail] = useState({});
     const [list, setList] = useState([]);
-    
+
     const [showResults, setShowResults] = React.useState(true)
 
     const onAdd = () => {
@@ -46,7 +46,7 @@ const Hook = () => {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Age</th>
-                        <th>Action</th>
+                        <th colSpan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,7 +89,7 @@ const Hook = () => {
                 <option value="Dubai">Dubai</option>
                 <option value="UK">UK</option>
             </select><br/><br/>
-                <b>I Agree the Terms & Conditions:</b>:{' '} <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange}/><br/><br/>
+                <b>IS Agree :</b>: <input type="checkbox" checked={userDetail.active} name="active" onChange={handleChange}/><br/><br/>
 
                 <button  className="btn-primary" onClick={submitValue}>Submit</button>
             </div>}
