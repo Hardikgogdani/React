@@ -22,27 +22,27 @@ const Hook = () => {
         let iserror = false;
         const error1 = {};
         if (userDetail.firstName === "") {
-            error1.firstName = "First Name required";
+            error1.firstName = "First Name should be written";
             iserror = true;
         }
         if (userDetail.lastName === "") {
-            error1.lastName = "Last Name required";
+            error1.lastName = "Last Name should be written";
             iserror = true;
         }
         if (userDetail.age === "") {
-            error1.age = "age required";
+            error1.age = "age must required";
             iserror = true;
         }
         if (userDetail.gender) {
-            error1.gender = "Gender required";
+            error1.gender = "Any one Gender to be selected";
             iserror = true;
         }
         if (userDetail.address === "") {
-            error1.address = "address required";
+            error1.address = "address should be written";
             iserror = true;
         }
         if (userDetail.country === "") {
-            error1.country = "country required";
+            error1.country = "Any one country should be selected";
             iserror = true;
         }
         if(userDetail.agree ===""){
